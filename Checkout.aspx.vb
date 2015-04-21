@@ -158,8 +158,8 @@ Partial Class Checkout
 
         ' name/value pairs
         Dim post_values As New Dictionary(Of String, String)
-        post_values.Add("x_login", "3G2YmfFT5s3a") ' your login ID
-        post_values.Add("x_tran_key", "7cmyK4F3B59Et62b") ' your transaction key
+        post_values.Add("x_login", "29RZygU2U5b8") ' Jason's login ID
+        post_values.Add("x_tran_key", "9285fRbw2j6FSH3d") ' Jason's transaction key
         post_values.Add("x_delim_data", "TRUE")
         post_values.Add("x_delim_char", "|")
         post_values.Add("x_relay_response", "FALSE")
@@ -204,25 +204,45 @@ Partial Class Checkout
         Dim response_array As Array = Split(post_response, post_values("x_delim_char"), -1)
 
         ' the results are output to the screen in the form of an html numbered list.
-        Response.Write("<OL>")
-        For Each value In response_array
-            If value <> Nothing Then
-                Response.Write("<LI>" & value & "</LI>" & vbCrLf)
-                'resultSpan.InnerHtml += "<LI>" & value & "&nbsp;</LI>" & vbCrLf
-            End If
-        Next
-        Response.Write("</OL>")
+        ' Response.Write("<OL>")
+        
+        If response_array.GetValue(0) = "1" Then
+            Response.Write("<script>alert(""This transaction has been approved."");</script>")
+            Response.Redirect("Receipt.aspx")
+        ElseIf response_array.GetValue(0) = "2" Then
+            Response.Write("<script>alert(""This transaction has been declined."");</script>")
+        ElseIf response_array.GetValue(0) = "3" Then
+            Response.Write("<script>alert(""The credit card number is invalid."");</script>")
+        ElseIf response_array.GetValue(0) = "4" Then
+            Response.Write("<script>alert(""This transaction has been declined."");</script>")
+        ElseIf response_array.GetValue(0) = "5" Then
+            Response.Write("<script>alert(""A valid amount is required."");</script>")
+        ElseIf response_array.GetValue(0) = "6" Then
+            Response.Write("<script>alert(""The credit card number is invalid."");</script>")
+        ElseIf response_array.GetValue(0) = "7" Then
+            Response.Write("<script>alert(""The credit card expiration date is invalid."");</script>")
+        ElseIf response_array.GetValue(0) = "8" Then
+            Response.Write("<script>alert(""The credit card has expired."");</script>")
+        ElseIf response_array.GetValue(0) = "9" Then
+            Response.Write("<script>alert(""The ABA code is invalid."");</script>")
+        ElseIf response_array.GetValue(0) = "10" Then
+            Response.Write("<script>alert(""The account number is invalid."");</script>")
+        End If
+
+
+        'This loop runs through the array
+        'For Each value In response_array
+        '    If value <> Nothing Then
+        '        Response.Write("<LI>" & value & "</LI>" & vbCrLf)
+        '    End If
+        'Next
         '***End authorize.net
-
-
 
         strSQLStatement = "UPDATE OrderInfo SET AuthCode = '" & response_array(4) & "' WHERE CustomerID = " & customerID & " AND OrderlineID = '" & strCartID & "'"
         cmdSQL = New SqlCommand(strSQLStatement, conn)
         conn.Open()
         dr = cmdSQL.ExecuteReader()
         conn.Close()
-
-
 
         Dim MyMailMessage As New MailMessage()
         MyMailMessage.IsBodyHtml = True
@@ -247,7 +267,7 @@ Partial Class Checkout
         End Try
 
         'Response.Redirect("Receipt.aspx")
-        
+
     End Sub
 End Class
 
