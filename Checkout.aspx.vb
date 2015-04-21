@@ -151,56 +151,68 @@ Partial Class Checkout
         dr = cmdSQL.ExecuteReader()
         conn.Close()
 
+        '***begin authroize.net
+        ' test server
         Dim post_url As String
         post_url = "https://test.authorize.net/gateway/transact.dll"
 
-
+        ' name/value pairs
         Dim post_values As New Dictionary(Of String, String)
-
-
-        post_values.Add("x_login", "3G2YmfFT5s3a")
-        post_values.Add("x_tran_key", "7cmyK4F3B59Et62b")
-
+        post_values.Add("x_login", "3G2YmfFT5s3a") ' your login ID
+        post_values.Add("x_tran_key", "7cmyK4F3B59Et62b") ' your transaction key
         post_values.Add("x_delim_data", "TRUE")
         post_values.Add("x_delim_char", "|")
         post_values.Add("x_relay_response", "FALSE")
-
         post_values.Add("x_type", "AUTH_CAPTURE")
         post_values.Add("x_method", "CC")
         post_values.Add("x_card_num", CreditCardNumber.Text)
         post_values.Add("x_exp_date", CreditCardExpirationMonth.Text + "/" + CreditCardExpirationYear.Text)
-
         post_values.Add("x_amount", total)
-        post_values.Add("x_description", "CIS 451 Test Transaction")
-
+        post_values.Add("x_description", "CIS 466 Test Transaction")
         post_values.Add("x_first_name", FirstName.Text)
         post_values.Add("x_last_name", LastName.Text)
         post_values.Add("x_address", StreetAddress.Text)
         post_values.Add("x_state", State.Text)
         post_values.Add("x_zip", Zip.Text)
+
+        ' converts them to the proper format "x_login=username&x_tran_key=a1B2c3D4"
         Dim post_string As String = ""
         For Each field As KeyValuePair(Of String, String) In post_values
             post_string &= field.Key & "=" & HttpUtility.UrlEncode(field.Value) & "&"
         Next
         post_string = Left(post_string, Len(post_string) - 1)
 
+        ' create an HttpWebRequest object to communicate with Authorize.net
         Dim objRequest As HttpWebRequest = CType(WebRequest.Create(post_url), HttpWebRequest)
         objRequest.Method = "POST"
         objRequest.ContentLength = post_string.Length
         objRequest.ContentType = "application/x-www-form-urlencoded"
 
+        ' send the data in a stream
         Dim myWriter As StreamWriter = Nothing
         myWriter = New StreamWriter(objRequest.GetRequestStream())
         myWriter.Write(post_string)
         myWriter.Close()
 
+        ' create an HttpWebRequest object to process the returned values in a stream and convert it into a string
         Dim objResponse As HttpWebResponse = CType(objRequest.GetResponse(), HttpWebResponse)
         Dim responseStream As New StreamReader(objResponse.GetResponseStream())
         Dim post_response As String = responseStream.ReadToEnd()
         responseStream.Close()
 
-
+        ' break the response string into an array
         Dim response_array As Array = Split(post_response, post_values("x_delim_char"), -1)
+
+        ' the results are output to the screen in the form of an html numbered list.
+        Response.Write("<OL>")
+        For Each value In response_array
+            If value IsNot Nothing Then
+                Response.Write("<LI>" & value & "</LI>" & vbCrLf)
+                'resultSpan.InnerHtml += "<LI>" & value & "&nbsp;</LI>" & vbCrLf
+            End If
+        Next
+        Response.Write("</OL>")
+        '***End authorize.net
 
 
 
@@ -230,13 +242,11 @@ Partial Class Checkout
         Try
             SMTPServer.Send(MyMailMessage)
 
-            
-
         Catch ex As SmtpException
 
         End Try
 
-        Response.Redirect("Receipt.aspx")
+        'Response.Redirect("Receipt.aspx")
         
     End Sub
 End Class
