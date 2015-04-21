@@ -206,7 +206,7 @@ Partial Class Checkout
         ' the results are output to the screen in the form of an html numbered list.
         Response.Write("<OL>")
         For Each value In response_array
-            If value IsNot Nothing Then
+            If value <> Nothing Then
                 Response.Write("<LI>" & value & "</LI>" & vbCrLf)
                 'resultSpan.InnerHtml += "<LI>" & value & "&nbsp;</LI>" & vbCrLf
             End If
