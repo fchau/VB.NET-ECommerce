@@ -41,7 +41,7 @@ footer, footer .container {background:#111}
 .promo img {border: 1px solid #ddd}
 .horizontal-nav ul li, .blog article, .line, hr, .product .sidebar li {border-top: 1px solid #ddd;}
 .page .contactform {border-left: 1px solid #ddd}
-.product .tab-content.sideline {border-left: 1px solid #ddd}
+.product .tab-content.sideline {border-left: 0px solid #ddd}
 header.prime, .horizontal-nav ul li, .gmap  {border-bottom: 1px solid #ddd}
 footer .doubleline {border-top:1px solid #333; border-bottom: 1px solid #333; }
 .horizontal-nav ul li a {border-top: 1px solid rgba(255,255,255, 0.25); border-left: 1px solid rgba(255,255,255, 0.25)}
@@ -69,8 +69,7 @@ button.theme {text-shadow: none}
 a, a:hover {text-decoration: none;}
 .btn {border-radius: 0}
 input, textarea, button {font-size: 1em !important}
-form label, form .btn {font-size: 1em;
-    width: 214px;
+form label, form .btn {font-size: 1em; width: 214px;
 } form legend {font-size:1.2em}
 .js .selectnav {display: none}
 .wrap {padding:0 20px}
@@ -103,13 +102,13 @@ img.alignright {padding-left: 10px}
 .top .logo a {font-size:4em; line-height:1em; padding-left: 20px} 
 .top .logo.image img {max-width:250px}
 .top .cart {text-align: right;}
-.top .cart form {position: relative; margin-top:10px}
+.top .cart form {position: relative; margin-top:10px }
 .top .cart form button {position: absolute; top:8px; right:15px; border:none; background: none}
 .top .top-search { margin-right:20px; margin-bottom:0; margin-top:5px; border-radius:0; width: 75px; -webkit-transition: all .5s ease; -moz-transition: all .5s ease; transition: all .5s ease; }
 .top .top-search:focus {width: 150px; padding-right: 18px}
 
 .selectnav { display: block; width:90%; margin:0 auto 10px}
-.nav {margin-bottom:0}
+.nav {width:500px; margin:0 auto; list-style:none;}
 .nav-pills > li > a {border-radius: 0}
 .horizontal-nav ul { text-align: center; display: none }
 .horizontal-nav ul li { float:left; border-left: 0; position: relative !important}
@@ -119,7 +118,7 @@ img.alignright {padding-left: 10px}
 .horizontal-nav ul li:first-child a { border-left: 0 none; }
 .horizontal-nav li a:hover { -webkit-transition: background-color 1000ms linear; -moz-transition: background-color 1000ms linear; -o-transition: background-color 1000ms linear; -ms-transition: background-color 1000ms linear; transition: background-color 1000ms linear; }
 
-.home-panel {text-align: center; margin:30px 20px}
+.home-panel {text-align: center; margin:30px 20px; }
 
 .promo, .feat {text-align: center}
 .promo article {max-width: 320px; line-height: 0}
@@ -187,22 +186,21 @@ header.prime a {color: black}
 /* ================ */
 /* Products section */
 /* ================ */
-
-.product {text-align: center}
-.product .nav {padding:20px 0 0}
-.product article {position:relative; overflow: hidden; text-align: center}
+.product { padding-bottom:20px; font-size:30px;}
+.product .nav {padding:20px 0 0;}
+.product article {position:relative; overflow: hidden; text-align: center; }
 .product article a:hover {text-decoration: none}
 .product .tab-content {padding:50px 0 30px}
 .product .tab-content.sideline {margin: 0 0 30px; padding:0}
-.product .tab-content.sideline article {width: 33%; float:left}
+.product .tab-content.sideline article {width: 33%; float:left; }
 .product .tab-content .wrap {margin-bottom:30px}
 .product .overlay {padding-top:15px}
-.product .query {display: none}
+.product .query {display: none; }
 .product .query li {float: none; display: inline-block; zoom:1}
 .product #myTab {padding-bottom: 20px}
-.product .view {margin: 20px}
-.product .sidebar {padding-left: 20px}
-.product .sidebar li {padding:5px 0}
+.product .view {margin: 20px;text-align:center;}
+.product .sidebar { position:relative;left:250px; padding:30px; margin-bottom:100%;}
+.product .sidebar li {padding:5px 0;}
 .product .sidebar li:hover {padding-left: 5px}
 .product .sidebar li:first-child {border-top: none}
 .product .sidebar li li {padding-left: 10px; font-size: .9em}
@@ -212,11 +210,17 @@ header.prime a {color: black}
 .product .sidebar .thumb {width:30%; float: left; padding-right: 5%}
 .product .sidebar .info {width: 65%; float:left; font-size: .9em; padding-top: 5px}
 
+.collection{padding-left: 40%;}
+
+.item{padding-left: 32%; padding-top:10px;}
+.addtocart{margin-left:20%;margin-top:10px;
+}
+
 /* ====================== */
 /* Single product section */
 /* ====================== */
 
-.single {padding-bottom:50px}
+.single {padding-bottom:50px; }
 .single .wrapper {padding:10px 20px}
 .single .screen a {display: none}
 .single .cross-wrapper {padding: 0 20px; text-align: center}
@@ -264,9 +268,9 @@ header.prime a {color: black}
 /* Sidebar section */
 /* =============== */
 
-.sidebar aside {margin-bottom:20px; padding-right:20px}
+.sidebar aside {margin-bottom:20px; padding-right:20px; }
 .sidebar aside .title {text-transform: uppercase; font-weight: 700}
-.sidebar ul {margin:0}
+.sidebar ul {margin:0; }
 .sidebar ul {list-style: none}
 .sidebar .tags span {float:left; padding:5px 8px; margin:0 5px 5px 0}
 
@@ -349,7 +353,7 @@ footer .currency {text-align: right} footer .currency a {padding-left: 5px}
 .fancybox-title { visibility: hidden; position: relative; text-shadow: none; z-index: 8050; }
 .fancybox-opened .fancybox-title { visibility: visible }
 .fancybox-title-float-wrap { position: absolute; bottom: 0; right: 50%; margin-bottom: -35px; z-index: 8050; text-align: center; }
-.fancybox-title-float-wrap .child { display: inline-block; margin-right: -100%; padding: 2px 20px; background: transparent; /* Fallback for web browsers that doesn't support RGBa */ background: rgba(0, 0, 0, 0.8); -webkit-border-radius: 15px; -moz-border-radius: 15px; border-radius: 15px; text-shadow: 0 1px 2px #222; color: #FFF; font-weight: bold; line-height: 24px; white-space: nowrap; }
+.fancybox-title-float-wrap .child { display: inline-block; margin-right: -100%; padding: 2px 20px; background: transparent; /* Fallback for web browsers that doesn't support RGBa */ background: rgba(0, 0, 0, 0.8); -webkit-border-radius: 15px; -moz-border-radius: 15px; border-radius: 15px; text-shadow: 0 1px 2px #222; color: #FFF; font-weight: bold;  line-height: 24px; white-space: nowrap; }
 .fancybox-title-outside-wrap { position: relative; margin-top: 10px; color: #fff; }
 .fancybox-title-inside-wrap { padding-top: 10px }
 .fancybox-title-over-wrap { position: absolute; bottom: 0; left: 0; color: #fff; padding: 10px; background: #000; background: rgba(0, 0, 0, .8); }
@@ -432,7 +436,7 @@ html[xmlns] .slides {display: block;}
 /* ============== */
 .payment { background: url(../img/payment.png) no-repeat; float: left; padding-right: 5px; opacity: .5}
 .payment:hover {opacity: 1}
-.2checkout { width: 38px; height: 24px; background-position: -49px -140px; }
+.checkout { width: 38px; height: 24px; background-position: -49px -140px; }
 .amex { width: 38px; height: 24px; background-position: -0px -140px; }
 .cirrus { width: 38px; height: 24px; background-position: -147px -105px; }
 .delta { width: 38px; height: 24px; background-position: -147px -70px; }
