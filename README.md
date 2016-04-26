@@ -1,2 +1,2 @@
 # VB.NET-ECommerce
-Senior Project for University. It is an online store with simple fuctionality using VB.NET
+A group senior project for the university. It is an online store with simple fuctionality using VB.NET. 
